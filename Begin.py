@@ -4,6 +4,7 @@ import recordaudio
 from openai import OpenAI
 import json
 import texttospeech
+import send
 
 while True:
     alreadymessages = [{"role": "system",
@@ -71,13 +72,10 @@ while True:
     # Ip adresse von henrik: 192.168.220.183
     tosend = json.loads(arguments)
     tosend["Benutzerid"] = 12354
-
-
+    send.send(tosend)
 
     arguments = json.loads(arguments)
 
     vorlesen = f"Ich habe für dich die Aktivität {arguments['beschaftigung']} eingetragen. Sie findet vom {arguments['anfangsdatum']} bis zum {arguments['enddatum']} statt."
 
     texttospeech.texttospeech(vorlesen)
-
-
