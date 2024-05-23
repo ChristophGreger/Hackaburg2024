@@ -40,6 +40,11 @@ while True:
     print("Datei Aufgenommen.")
     print("Jetzt kommt der Text, der drin ist:")
 
+    import soundfile
+
+    data, samplerate = soundfile.read('my_recording.wav')
+    soundfile.write('my_recording.wav', data, samplerate, subtype='PCM_16')
+
     r = sr.Recognizer()
 
     harvard = sr.AudioFile('my_recording.wav')
@@ -47,7 +52,7 @@ while True:
         audio = r.record(source)
 
     try:
-        print(r.recognize_bing(audio, language='de-DE'))
+        print(r.recognize_google(audio, language='de-DE'))
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand the audio")
     except sr.RequestError as e:
