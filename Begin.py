@@ -74,11 +74,16 @@ def run():
         tosend = json.loads(arguments)
         tosend["Organizer"] = data.BenutzerID
         print(tosend)
-        send.send(tosend)
+        response = send.send(tosend)
         print("Sent")
 
         arguments = json.loads(arguments)
 
-        vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet vom {arguments['startTime']} bis zum {arguments['endTime']} statt."
+        if "forbidden" in response.keys():
+            vorlesen = f"Es tut mir leid, aber du kannst dich nur für eine Aktivität glechzeitig eintragen. Deine letzte Anfrage wurde daher ignoriert."
+            texttospeech.texttospeech(vorlesen)
+            continue
+
+        vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet zwischen dem {arguments['startTime']} und dem {arguments['endTime']} statt."
 
         texttospeech.texttospeech(vorlesen)
