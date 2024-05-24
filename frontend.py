@@ -9,17 +9,20 @@ import threading
 class MyApp(tkinter.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.pack()
+        self.pack(fill="both", expand=True)
         self.create_widgets()
 
     def create_widgets(self):
         # Erstellen Sie das Label-Widget
         self.label_text = tkinter.StringVar()
         self.label_text.set("Du wurdest für noch keine Aktivität gematcht!")
-        self.label = tkinter.Label(self, textvariable=self.label_text)
+        self.label = tkinter.Label(self, textvariable=self.label_text, font=("Arial", 20))
         self.label.pack()
 
-        self.tree = ttk.Treeview(self)
+        style = ttk.Style()
+        style.configure("Treeview", font=("Arial", 20))  # Setzen Sie die Schriftgröße auf 20
+
+        self.tree = ttk.Treeview(self, style="Treeview")
 
         # Definieren Sie die Spalten
         self.tree["columns"] = ("Vorname", "Nachname", "Telefonnummer")
@@ -76,4 +79,5 @@ def update_get_matches():
 update_get_matches()
 update()
 x = threading.Thread(target=Begin.run)
+x.start()
 app.mainloop()
