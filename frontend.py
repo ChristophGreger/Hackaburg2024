@@ -1,6 +1,10 @@
 import tkinter
 from tkinter import ttk
 
+import Begin
+import getmatches
+import threading
+
 
 class MyApp(tkinter.Frame):
     def __init__(self, master=None):
@@ -38,10 +42,16 @@ class MyApp(tkinter.Frame):
 
         self.tree.pack(side="top", fill="both", expand=True)
 
-    def matching(self, aktivitat: str, persondict: dict):
+    def matching(self):
+        aktivitat = getmatches.aktivitat
+        persondictlist = getmatches.matchedpersons
+        if aktivitat is None:
+            self.label_text.set("Du wurdest für noch keine Aktivität gematcht!")
+            self.tree.delete(*self.tree.get_children())
+            return
         self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht!")
         self.tree.delete(*self.tree.get_children())
-        for i, person in enumerate(persondict):
+        for i, person in enumerate(persondictlist):
             self.tree.insert(parent='', index='end', iid=i, text='',
                              values=(person["Vorname"], person["Nachname"], person["Telefonnummer"]))
 
@@ -49,4 +59,21 @@ class MyApp(tkinter.Frame):
 root = tkinter.Tk()
 root.attributes('-fullscreen', True)
 app = MyApp(root)
+
+
+def update():
+    # Fügen Sie hier den Code ein, der regelmäßig ausgeführt werden soll
+    app.matching()
+    getmatches.get_matches()
+    root.after(1000, update)  # Wiederholen Sie dies nach 1000 Millisekunden (1 Sekunde)
+
+
+def update_get_matches():
+    getmatches.get_matches()
+    root.after(10000, update_get_matches)  # Wiederholen Sie dies nach 10000 Millisekunden (10 Sekunde)
+
+
+update_get_matches()
+update()
+x = threading.Thread(target=Begin.run)
 app.mainloop()
