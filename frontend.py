@@ -45,15 +45,30 @@ class MyApp(tkinter.Frame):
 
         self.tree.pack(side="top", fill="both", expand=True)
 
+
+    def show_tree(self):
+        self.tree.pack(side="top", fill="both", expand=True)
+
+    def is_tree_visible(self):
+        return bool(self.tree.pack_info())
+
+    def hide_tree(self):
+        self.tree.pack_forget()
+
     def matching(self):
         aktivitat = getmatches.aktivitat
         persondictlist = getmatches.matchedpersons
         if aktivitat is None:
             self.label_text.set("Du wurdest für noch keine Aktivität gematcht!")
-            self.tree.delete(*self.tree.get_children())
+            if self.is_tree_visible():
+                self.tree.delete(*self.tree.get_children())
+            if self.is_tree_visible():
+                self.hide_tree()
             return
         self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht!")
         self.tree.delete(*self.tree.get_children())
+        if not self.is_tree_visible():
+            self.show_tree()
         for i, person in enumerate(persondictlist):
             self.tree.insert(parent='', index='end', iid=i, text='',
                              values=(person["Vorname"], person["Nachname"], person["Telefonnummer"]))

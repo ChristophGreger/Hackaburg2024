@@ -11,7 +11,7 @@ def get_matches():
     global matchedpersons
     global aktivitat
     # for testing purpose
-    aktivitat = aktivitat + "a"
+    aktivitat = None
     # response = requests.post(url, data=data.BenutzerID)
     # TODO Parse the response and set the global variables matchedpersons and aktivitat
     # print(response.json())

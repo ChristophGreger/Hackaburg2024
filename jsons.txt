@@ -1,0 +1,8 @@
+neue Aktivität :
+
+{
+    "aktivitat": "Fussball",
+    "anfangsdatum": "02/06/2024", # (dd/mm/yyyy)
+    "enddatum": "02/06/2024", # (dd/mm/yyyy)
+    "USERID": 1235
+}

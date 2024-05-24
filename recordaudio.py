@@ -1,7 +1,6 @@
 import sounddevice as sd
 import numpy as np
 import RPi.GPIO as GPIO
-import time
 from scipy.io import wavfile
 import speech_recognition as sr
 import soundfile
