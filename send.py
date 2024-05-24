@@ -8,5 +8,5 @@ def send(data) -> dict:
     print("Status Code", response.status_code)
     if response.content:
         print("JSON Response ", response.content)
-        return json.loads(response.content)
+        return response.json()
     return {}

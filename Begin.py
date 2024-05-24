@@ -9,7 +9,7 @@ import send
 def run():
     while True:
         alreadymessages = [{"role": "system",
-                            "content": "Frag immer nach, wenn du nicht sicher bist, welche Daten in eine Funktion einzufügen sind. Mache nie Annahmen. Stelle sicher, dass Tage vom Nutzer sicher festgelegt werden."}]
+                            "content": "Frag immer nach, wenn du nicht sicher bist, welche Daten in eine Funktion einzufügen sind. Mache nie Annahmen. Heute ist der 24.05.2024. Der Wochentag heute ist Freitag. Benutze in deiner Antwort keine Sonderzeichen. Antworte nicht in langen Antworten!"}]
 
         arguments = ""
 
@@ -21,7 +21,7 @@ def run():
             alreadymessages.append({"role": "user", "content": text})
 
             completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4-turbo",
                 max_tokens=300,
                 temperature=0,
                 messages=alreadymessages,
@@ -40,11 +40,11 @@ def run():
                                     },
                                     "startTime": {
                                         "type": "string",
-                                        "description": "Das Datum, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '10/11/2022' (DD/MM/YYYY). Wenn nötig berechne das Datum anhand des aktuellen Datums. Heute ist der 24.Mai 2024 und heute ist ein Freitag."
+                                        "description": "Das Datum, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '25/05/2024' (DD/MM/YYYY)"
                                     },
                                     "endTime": {
                                         "type": "string",
-                                        "description": "Das Datum, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '10/11/2022' (DD/MM/YYYY). Berechne dabei das Datum anhand des aktuellen Datums, wenn nötig. Heute ist der 24.Mai 2024 und heute ist ein Freitag."
+                                        "description": "Das Datum, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '25/05/2024' (DD/MM/YYYY)"
                                     }
                                 },
                                 "required": ["activity", "endTime", "startTime"],
@@ -72,14 +72,20 @@ def run():
         # Hier müssen jetzt die Sachen an den Server geschickt werden
         # Ip adresse von henrik: 192.168.220.183
         tosend = json.loads(arguments)
-        tosend["Organizer"] = data.BenutzerID
+        tosend["organizer"] = data.BenutzerID
         print(tosend)
         response = send.send(tosend)
         print("Sent")
 
         arguments = json.loads(arguments)
 
-        if "forbidden" in response.keys():
+        print(arguments)
+
+
+        print("Response")
+        print(response)
+
+        if response != None and "forbidden" in response.keys():
             vorlesen = f"Es tut mir leid, aber du kannst dich nur für eine Aktivität glechzeitig eintragen. Deine letzte Anfrage wurde daher ignoriert."
             texttospeech.texttospeech(vorlesen)
             continue

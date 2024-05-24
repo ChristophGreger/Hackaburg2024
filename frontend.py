@@ -24,11 +24,11 @@ class MyApp(tkinter.Frame):
         # Erstellen Sie das Label-Widget
         self.label_text = tkinter.StringVar()
         self.label_text.set("Du wurdest für noch keine Aktivität gematcht!")
-        self.label = tkinter.Label(self, textvariable=self.label_text, font=("Arial", 20))
+        self.label = tkinter.Label(self, textvariable=self.label_text, font=("Arial", 14))
         self.label.pack()
 
         style = ttk.Style()
-        style.configure("Treeview", font=("Arial", 20))  # Setzen Sie die Schriftgröße auf 20
+        style.configure("Treeview", font=("Arial", 14))  # Setzen Sie die Schriftgröße auf 20
 
         self.tree = ttk.Treeview(self, style="Treeview")
 
@@ -73,7 +73,7 @@ class MyApp(tkinter.Frame):
             if self.is_tree_visible():
                 self.hide_tree()
             return
-        self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht!")
+        self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht! Diese findet am {getmatches.Datum} statt.")
         self.tree.delete(*self.tree.get_children())
         if not self.is_tree_visible():
             self.show_tree()
