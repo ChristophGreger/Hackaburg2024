@@ -34,20 +34,20 @@ def run():
                             "parameters": {
                                 "type": "object",
                                 "properties": {
-                                    "beschaftigung": {
+                                    "activity": {
                                         "type": "string",
                                         "description": "Die Beschäftigung, die der Nutzer machen möchte.",
                                     },
-                                    "anfangsdatum": {
+                                    "startTime": {
                                         "type": "string",
                                         "description": "Das Datum, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '10/11/2022' (DD/MM/YYYY). Wenn nötig berechne das Datum anhand des aktuellen Datums. Heute ist der 24.Mai 2024 und heute ist ein Freitag."
                                     },
-                                    "enddatum": {
+                                    "endTime": {
                                         "type": "string",
                                         "description": "Das Datum, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '10/11/2022' (DD/MM/YYYY). Berechne dabei das Datum anhand des aktuellen Datums, wenn nötig. Heute ist der 24.Mai 2024 und heute ist ein Freitag."
                                     }
                                 },
-                                "required": ["beschaftigung", "enddatum", "anfangsdatum"],
+                                "required": ["activity", "endTime", "startTime"],
                             },
                         },
                     }
@@ -72,11 +72,13 @@ def run():
         # Hier müssen jetzt die Sachen an den Server geschickt werden
         # Ip adresse von henrik: 192.168.220.183
         tosend = json.loads(arguments)
-        tosend["Benutzerid"] = data.BenutzerID
+        tosend["Organizer"] = data.BenutzerID
+        print(tosend)
         send.send(tosend)
+        print("Sent")
 
         arguments = json.loads(arguments)
 
-        vorlesen = f"Ich habe für dich die Aktivität {arguments['beschaftigung']} eingetragen. Sie findet vom {arguments['anfangsdatum']} bis zum {arguments['enddatum']} statt."
+        vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet vom {arguments['startTime']} bis zum {arguments['endTime']} statt."
 
         texttospeech.texttospeech(vorlesen)

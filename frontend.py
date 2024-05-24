@@ -3,7 +3,15 @@ from tkinter import ttk
 
 import Begin
 import getmatches
+import json
 import threading
+import data as dt
+
+
+with open("HackaburgGregor/backend/user_data.json", "r") as file:
+    data = json.load(file)
+    dt.BenutzerID = data["id"]
+
 
 
 class MyApp(tkinter.Frame):
@@ -82,7 +90,6 @@ app = MyApp(root)
 def update():
     # Fügen Sie hier den Code ein, der regelmäßig ausgeführt werden soll
     app.matching()
-    getmatches.get_matches()
     root.after(1000, update)  # Wiederholen Sie dies nach 1000 Millisekunden (1 Sekunde)
 
 
