@@ -9,7 +9,7 @@ import send
 def run():
     while True:
         alreadymessages = [{"role": "system",
-                            "content": "Frag immer nach, wenn du nicht sicher bist, welche Daten in eine Funktion einzufügen sind. Mache nie Annahmen. Frage immer nach einer Bestätigung der Daten, bevor du sie in eine Funktion eingibts. Heute ist der 24.05.2024. Der Wochentag heute ist Freitag. Benutze in deiner Antwort keine Sonderzeichen. Antworte nicht in langen Antworten!"}]
+                            "content": "Frag immer nach, wenn du nicht sicher bist, welche Daten in eine Funktion einzufügen sind. Mache nie Annahmen. Frage immer nach einer Bestätigung der Daten, bevor du sie in eine Funktion eingibts. Heute ist der 25.05.2024. Der Wochentag heute ist Samstag. Benutze in deiner Antwort keine Sonderzeichen. Antworte nicht in langen Antworten!"}]
 
         arguments = ""
 
