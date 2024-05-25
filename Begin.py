@@ -69,27 +69,30 @@ def run():
 
         print(arguments)
 
-        # Hier müssen jetzt die Sachen an den Server geschickt werden
-        # Ip adresse von henrik: 192.168.220.183
-        tosend = json.loads(arguments)
-        tosend["organizer"] = data.BenutzerID
-        print(tosend)
-        response = send.send(tosend)
-        print("Sent")
+        try:
+            # Hier müssen jetzt die Sachen an den Server geschickt werden
+            # Ip adresse von henrik: 192.168.220.183
+            tosend = json.loads(arguments)
+            tosend["organizer"] = data.BenutzerID
+            print(tosend)
+            response = send.send(tosend)
+            print("Sent")
 
-        arguments = json.loads(arguments)
+            arguments = json.loads(arguments)
 
-        print(arguments)
+            print(arguments)
 
 
-        print("Response")
-        print(response)
+            print("Response")
+            print(response)
 
-        if response != None and "forbidden" in response.keys():
-            vorlesen = f"Es tut mir leid, aber du kannst dich nur für eine Aktivität glechzeitig eintragen. Deine letzte Anfrage wurde daher ignoriert."
+            if response != None and "forbidden" in response.keys():
+                vorlesen = f"Es tut mir leid, aber du kannst dich nur für eine Aktivität glechzeitig eintragen. Deine letzte Anfrage wurde daher ignoriert."
+                texttospeech.texttospeech(vorlesen)
+                continue
+
+            vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet zwischen dem {arguments['startTime']} und dem {arguments['endTime']} statt."
+
             texttospeech.texttospeech(vorlesen)
-            continue
-
-        vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet zwischen dem {arguments['startTime']} und dem {arguments['endTime']} statt."
-
-        texttospeech.texttospeech(vorlesen)
+        except:
+            pass

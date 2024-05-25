@@ -38,16 +38,18 @@ def record() -> str:
 
     print("Datei Aufgenommen.")
     print("Jetzt kommt der Text, der drin ist:")
+    try:
+        data, samplerate = soundfile.read('my_recording.wav')
+        soundfile.write('my_recording.wav', data, samplerate, subtype='PCM_16')
 
-    data, samplerate = soundfile.read('my_recording.wav')
-    soundfile.write('my_recording.wav', data, samplerate, subtype='PCM_16')
+        r = sr.Recognizer()
 
-    r = sr.Recognizer()
+        harvard = sr.AudioFile('my_recording.wav')
+        with harvard as source:
+            audio = r.record(source)
 
-    harvard = sr.AudioFile('my_recording.wav')
-    with harvard as source:
-        audio = r.record(source)
-
-    text = r.recognize_google(audio, language='de-DE')
-    print("end")
-    return text
+        text = r.recognize_google(audio, language='de-DE')
+        print("end")
+        return text
+    except Exception as e:
+        return " "
