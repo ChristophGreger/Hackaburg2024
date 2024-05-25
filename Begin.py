@@ -21,7 +21,7 @@ def run():
             alreadymessages.append({"role": "user", "content": text})
 
             completion = client.chat.completions.create(
-                model="gpt-4-turbo",
+                model="gpt-4o",
                 max_tokens=300,
                 temperature=0,
                 messages=alreadymessages,
@@ -40,11 +40,11 @@ def run():
                                     },
                                     "startTime": {
                                         "type": "string",
-                                        "description": "Das Datum und die Stunde, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 ab 18 Uhr (DD/MM/YYYY/HH)."
+                                        "description": "Das Datum und die Stunde, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 ab 18 Uhr (DD/MM/YYYY/HH). Heute ist der 25.05.2024 und heute ist Samstag. Berechne wenn nötig Datumsangaben anhand des heutigen Datums."
                                     },
                                     "endTime": {
                                         "type": "string",
-                                        "description": "Das Datum und die Stunde, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 bis 18 Uhr (DD/MM/YYYY/HH)."
+                                        "description": "Das Datum und die Stunde, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 bis 18 Uhr (DD/MM/YYYY/HH).  Heute ist der 25.05.2024 und heute ist Samstag. Berechne wenn nötig Datumsangaben anhand des heutigen Datums."
                                     }
                                 },
                                 "required": ["activity", "endTime", "startTime"],
