@@ -27,4 +27,8 @@ def get_matches():
 
         aktivitat = mydict["Activity"]
         date = mydict["Date"].split("-")
-        Datum = f"{date[2][0:2]}.{date[1][0:2]}.{date[0][0:4]}"
+        # TODO ensure that the date is in the correct format
+        print(date)
+        print(aktivitat)
+        print(matchedpersons)
+        Datum = f"{date[2][0:2]}.{date[1][0:2]}.{date[0][0:4]} um {date[2][3:5]} Uhr"

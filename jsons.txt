@@ -2,7 +2,7 @@ neue Aktivität :
 
 {
     "aktivitat": "Fussball",
-    "anfangsdatum": "02/06/2024", # (dd/mm/yyyy)
-    "enddatum": "02/06/2024", # (dd/mm/yyyy)
+    "anfangsdatum": "02/06/2024/18", # (dd/mm/yyyy/hh)
+    "enddatum": "02/06/2024/18", # (dd/mm/yyyy/hh)
     "USERID": 1235
 }

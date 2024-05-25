@@ -58,22 +58,31 @@ class MyApp(tkinter.Frame):
         self.tree.pack(side="top", fill="both", expand=True)
 
     def is_tree_visible(self):
-        return bool(self.tree.pack_info())
+        try:
+            return bool(self.tree.pack_info())
+        except tkinter.TclError:
+            return False
 
     def hide_tree(self):
         self.tree.pack_forget()
 
     def matching(self):
+        print("Matching aufgerufen!")
         aktivitat = getmatches.aktivitat
         persondictlist = getmatches.matchedpersons
         if aktivitat is None:
+            print("Aktivität ist None")
             self.label_text.set("Du wurdest für noch keine Aktivität gematcht!")
             if self.is_tree_visible():
+                print("Aktivität ist None 2")
                 self.tree.delete(*self.tree.get_children())
             if self.is_tree_visible():
+                print("Aktivität ist None 3")
                 self.hide_tree()
+            print("Aktivität abgeschlossen")
             return
-        self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht! Diese findet am {getmatches.Datum} statt.")
+        self.label_text.set(f"Du wurdest für die Aktivität {aktivitat} gematcht!\nDiese findet am {getmatches.Datum} statt.")
+        print("Label_text " + self.label_text.get())
         self.tree.delete(*self.tree.get_children())
         if not self.is_tree_visible():
             self.show_tree()
@@ -88,8 +97,10 @@ app = MyApp(root)
 
 
 def update():
+    print("Update aufgerufen!")
     # Fügen Sie hier den Code ein, der regelmäßig ausgeführt werden soll
     app.matching()
+    print("Updated the GUI with the update method.")
     root.after(1000, update)  # Wiederholen Sie dies nach 1000 Millisekunden (1 Sekunde)
 
 

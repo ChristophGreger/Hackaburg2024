@@ -40,11 +40,11 @@ def run():
                                     },
                                     "startTime": {
                                         "type": "string",
-                                        "description": "Das Datum, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '25/05/2024' (DD/MM/YYYY)"
+                                        "description": "Das Datum und die Stunde, ab dem der Nutzer die Beschäftigung gerne machen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 ab 18 Uhr (DD/MM/YYYY/HH)."
                                     },
                                     "endTime": {
                                         "type": "string",
-                                        "description": "Das Datum, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '25/05/2024' (DD/MM/YYYY)"
+                                        "description": "Das Datum und die Stunde, bis zu dem der Nutzer die Beschäftigung spätestens machen wollen würde. Beispiel: '25/05/2024/18' für den 25.05.2024 bis 18 Uhr (DD/MM/YYYY/HH)."
                                     }
                                 },
                                 "required": ["activity", "endTime", "startTime"],
