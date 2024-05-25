@@ -91,7 +91,7 @@ def run():
                 texttospeech.texttospeech(vorlesen)
                 continue
 
-            vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet zwischen dem {arguments['startTime']} und dem {arguments['endTime']} statt."
+            vorlesen = f"Ich habe für dich die Aktivität {arguments['activity']} eingetragen. Sie findet zwischen dem {arguments['startTime']} Uhr und dem {arguments['endTime']} Uhr statt."
 
             texttospeech.texttospeech(vorlesen)
         except:
